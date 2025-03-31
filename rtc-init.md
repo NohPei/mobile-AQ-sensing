@@ -2,8 +2,8 @@
 
 To get the DS3231 RTC working reliably on Raspberry Pi OS (Bookworm), follow these steps:
 
-1. **Enable I²C** using `sudo raspi-config`, and verify the RTC is detected at address `0x68` using `i2cdetect -y 1`.
-2. In `/boot/firmware/config.txt`, add the following line to enable the overlay (optional if using the fallback only):
+1. enable i2c using `sudo raspi-config`, and verify the RTC is detected at address `0x68` using `i2cdetect -y 1`.
+2. In `/boot/firmware/config.txt`, add the following line all the way at the bottomt to enable the overlay:
 
 ```ini
 dtoverlay=i2c-rtc,ds3231
@@ -21,22 +21,7 @@ rtc-ds1307
 sudo update-initramfs -u
 ```
 
-5. Create systemd service for syncing (for when /dev/rtc0 already exists)
-```ini
-[Unit]
-Description=DS3231 RTC Init
-After=multi-user.target
-
-[Service]
-Type=oneshot
-ExecStart=/bin/bash -c 'while [ ! -e /dev/rtc0 ]; do sleep 0.5; done; /sbin/hwclock -s'
-RemainAfterExit=yes
-
-[Install]
-WantedBy=multi-user.target
-```
-
-6. Create backup systemd serivce (load module, manually register if missing, set system clock)
+5. Create backup systemd serivce (load module, manually register if missing, set system clock)
 ```ini
 [Unit]
 Description=Manual Fallback RTC Init
