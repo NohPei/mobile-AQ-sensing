@@ -21,7 +21,7 @@ rtc-ds1307
 sudo update-initramfs -u
 ```
 
-5. Create fallback script at /usr/local/bin/fallback_rtc_init.sh:
+5. Create fallback script at `/usr/local/bin/fallback_rtc_init.sh`:
 ```bash
 #!/bin/bash
 
@@ -55,7 +55,7 @@ fi
 - make it executable: sudo chmod +x /usr/local/bin/fallback_rtc_init.sh
 
 
-6. Make the systemd serivce (load module, manually register if missing, set system clock)
+6. Make the systemd serivce (load module, manually register if missing, set system clock) at `/etc/systemd/system/fallback-rtc.service`:
 ```ini
 [Unit]
 Description=Manual Fallback RTC Init
@@ -76,7 +76,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable fallback-rtc.service
 ```
 
-7. (optional/overkill but good for system longevity and consistency) sync RTC if NTP sync happens (pi connects to network) at /usr/local/bin/rtc_writeback.sh:
+7. (optional/overkill but good for system longevity and consistency) sync RTC if NTP sync happens (pi connects to network) at `/usr/local/bin/rtc_writeback.sh`:
 ```bash
 #!/bin/bash
 
@@ -98,9 +98,9 @@ done
 logger -t "$LOG_TAG" "ERROR: NTP sync not achieved within timeout."
 exit 1
 ```
-- make it executable: sudo chmod +x /usr/local/bin/rtc_writeback.sh
+- make it executable: `sudo chmod +x /usr/local/bin/rtc_writeback.sh`
 
-8. Create the systemd service for it:
+8. Create the systemd service for it at `/etc/systemd/system/rtc-writeback.service`:
 ```ini
 [Unit]
 Description=Write system time to RTC after NTP sync
