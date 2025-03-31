@@ -8,11 +8,11 @@ To get the DS3231 RTC working reliably on Raspberry Pi OS (Bookworm), follow the
 ```ini
 dtoverlay=i2c-rtc,ds3231
 ```
-3. Add the RTC driver to /etc/modules: (underscore!)
+3. Add the RTC driver to `/etc/modules`: (underscore!)
 ```ini
 rtc_ds1307
 ```
-4. Add the driver to /etc/initramfs-tools/modules: (hyphen!)
+4. Add the driver to `/etc/initramfs-tools/modules`: (hyphen!)
 ```ini
 rtc-ds1307
 ```
@@ -31,28 +31,38 @@ RTC_ADDRESS=0x68
 
 logger -t "$LOG_TAG" "Starting RTC fallback init..."
 
+# Load RTC driver
 modprobe rtc_ds1307
 logger -t "$LOG_TAG" "Loaded rtc_ds1307 driver."
 
+# If /dev/rtc0 doesn't exist, try to register the device
 if [ ! -e /dev/rtc0 ]; then
     logger -t "$LOG_TAG" "/dev/rtc0 not found. Attempting manual registration..."
     echo "ds3231 $RTC_ADDRESS" > /sys/class/i2c-adapter/i2c-${I2C_BUS}/new_device 2>/dev/null
     sleep 1
 fi
 
+# If RTC is now present
 if [ -e /dev/rtc0 ]; then
     logger -t "$LOG_TAG" "RTC registered successfully at /dev/rtc0."
     sleep 1
-    if hwclock -s; then
-        logger -t "$LOG_TAG" "System time set from RTC: $(hwclock -r)"
+
+    # Check system time before setting it from RTC
+    CURRENT_YEAR=$(date +%Y)
+    if [ "$CURRENT_YEAR" -lt 2022 ]; then
+        if hwclock -s; then
+            logger -t "$LOG_TAG" "System time set from RTC: $(hwclock -r)"
+        else
+            logger -t "$LOG_TAG" "ERROR: hwclock failed to read from RTC after registration."
+        fi
     else
-        logger -t "$LOG_TAG" "ERROR: hwclock failed to read from RTC after registration."
+        logger -t "$LOG_TAG" "System time already appears valid. Skipping hwclock -s."
     fi
 else
     logger -t "$LOG_TAG" "ERROR: /dev/rtc0 still not available. RTC registration failed or device not present."
 fi
 ```
-- make it executable: sudo chmod +x /usr/local/bin/fallback_rtc_init.sh
+- make it executable: `sudo chmod +x /usr/local/bin/fallback_rtc_init.sh`
 
 
 6. Make the systemd serivce (load module, manually register if missing, set system clock) at `/etc/systemd/system/fallback-rtc.service`:
