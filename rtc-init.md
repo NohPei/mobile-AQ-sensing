@@ -122,6 +122,6 @@ sudo systemctl enable fallback-rtc.service
 ```
 
 ### Summary:   
--> this will make RTC work on every boot with/without connectivity and set the system time to correctly use the hardware clock. 
--> bonus: will resync with NTP when Wi-Fi connectivity happens so RTC is updated from system time.
+1. this will make RTC work on every boot with/without connectivity and set the system time to correctly use the hardware clock. 
+2. bonus: will resync with NTP when Wi-Fi connectivity happens so RTC is updated from system time.
 
