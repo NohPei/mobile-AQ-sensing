@@ -6,7 +6,7 @@ Requires=fallback-rtc.service
 [Service]
 Type=simple
 User=jgers32
-ExecStart=/bin/bash -c 'source /home/jgers32/Desktop/aq-sensor/env/bin/activate && python /home/jgers32/Desktop/aq-sensor/no_pm_sensor_logger.py'
+ExecStart=/bin/bash -c 'source /home/jgers32/Desktop/aq-sensor/env/bin/activate && python /home/jgers32/Desktop/aq-sensor/complete_sensor_logger.py'
 WorkingDirectory=/home/jgers32/Desktop/aq-sensor
 Restart=always
 RestartSec=5
