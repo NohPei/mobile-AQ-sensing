@@ -18,11 +18,12 @@
 - ENS160 might prove to not be necessary, for right now I threw in a personal one I had laying around
 ---
 # How are the different sensors interfaced?
-I2C: RTC, MQs, PMSA003I, IMU, ENS160, SCD41
-UART: GPS
+- I2C: RTC, MQs (x3), PMSA003I, IMU, ENS160, SCD41
+- UART: GPS
 
 ---
 # Sensors + Data Structure 
+Overview and in-depth resources for the sensors, type of data they capture, and output format of the CSV.
 
 ### Real-Time Clock (ds3231) -> Timestamp (ms)
 - ex) 2025-03-20 13:45:45.611
