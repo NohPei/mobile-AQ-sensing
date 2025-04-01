@@ -18,8 +18,9 @@
 - ENS160 might prove to not be necessary, for right now I threw in a personal one I had laying around
 ---
 # How are the different sensors interfaced?
-- I2C: RTC, MQs (x3), PMSA003I, IMU, ENS160, SCD41
-- UART: GPS
+- I2C: RTC, MQs (x3), IMU, ENS160, SCD41
+- Serial pins: GPS
+- Serial Cable: PMSA003I
 
 ---
 # Sensors + Data Structure 
