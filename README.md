@@ -1,3 +1,6 @@
+**NOTE:** *this repository and README file are still actively under development*
+---
+
 # Mobile AQ Sensing Unit Overview
 
 - **Raspberry Pi 4B** (Raspberry Pi OS Bookworm)
