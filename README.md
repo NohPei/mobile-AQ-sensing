@@ -10,7 +10,7 @@
   - MQ-4 (Methane)
   - MQ-8 (Hydrogen)
   - All read via **ADS1115 16-bit ADC**
-- **Plantower PMSA003I** (Particulate Matter Sensor, PM1.0 / PM2.5 / PM10)
+- **Adafruit Breakout board Plantower PMSA003I** (Particulate Matter Sensor, PM1.0 / PM2.5 / PM10)
 - **GY-BNO08X** (9 DoF IMU — accelerometer, gyro, magnetometer)
 - **Adafruit ENS160** (MOX gas sensor — eCO₂, TVOC, AQI)
 - **Adafruit SCD41** (True/NDIR CO₂, Temperature, Humidity)
@@ -21,10 +21,8 @@
 - ENS160 might prove to not be necessary, for right now I threw in a personal one I had laying around
 ---
 # How are the different sensors interfaced?
-- I2C: RTC, MQs (x3), IMU, ENS160, SCD41
-- Serial pins: GPS
-- Serial Cable: PMSA003I
-
+- I2C: RTC, MQs (x3), IMU, ENS160, SCD41, PM
+- UART: GPS
 ---
 # Sensors + Data Structure 
 Overview and in-depth resources for the sensors, type of data they capture, and output format of the CSV.
