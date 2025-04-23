@@ -21,8 +21,9 @@
 - while ENS160 is currently included, we are actively searching to replace it with an alternative sensor for VOCs only
 
 ### TVOC vs. VOC
-**VOCs (Volatile Organic Compounds)** = individual or specific groups of volatile organic compounds.
-**TVOC (Total Volatile Organic Compounds)** = represents the total concentration of all volatile organic compounds in the air. 
+VOCs (Volatile Organic Compounds) = individual or specific groups of volatile organic compounds.
+TVOC (Total Volatile Organic Compounds) = represents the total concentration of all volatile organic compounds in the air.
+
 ---
 # How are the different sensors interfaced?
 - I2C: RTC, MQs (x3), IMU, ENS160, SCD41, PM
