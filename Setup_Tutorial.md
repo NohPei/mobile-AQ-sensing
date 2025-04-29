@@ -21,3 +21,8 @@
 
 This guide provides step-by-step instructions for building and configuring a mobile gas sensing module from scratch. Follow each section in order for a complete setup.
 
+## Software Requirement
+1. System Image
+
+Download it through https://www.raspberrypi.com/software/
+
