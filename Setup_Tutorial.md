@@ -22,7 +22,15 @@
 This guide provides step-by-step instructions for building and configuring a mobile gas sensing module from scratch. Follow each section in order for a complete setup.
 
 ## Software Requirement
-1. System Image
+
+#### Operating System Installation
 
 Download it through https://www.raspberrypi.com/software/
+
+In this repo, Raspberry Pi 5, 64 bit enhanced version is installed
+
+#### Required Libraries (in python venv)
+
+1. ADS1115 => pip install adafruit-circuitpython-ads1x15
+2. lgpio (not defaulty installed for pi5, higher performance) => pip install lgpio
 
