@@ -16,13 +16,14 @@
 - **Adafruit SCD41** (True/NDIR CO₂, Temperature, Humidity)
 - **GT-U7 GPS & GNSS Antenna Amplifier**
 
+- **3D printed enclosure** (PLA)
 
-**NOTE:** why both ENS160 and SCD41? We could use only SCD41 to measure *true* CO₂ (which isn't affected by VOCs like the ENS160), but we want something to measure TVOC/VOCs
+**NOTE:** why both ENS160 and SCD41? We could use only SCD41 to measure *true* CO₂ (which isn't affected by VOCs like the ENS160), but we wanted something to measure TVOC/VOCs
 - while ENS160 is currently included, we are actively searching to replace it with an alternative sensor for VOCs only
 
 ### TVOC vs. VOC
-VOCs (Volatile Organic Compounds) = individual or specific groups of volatile organic compounds.
-TVOC (Total Volatile Organic Compounds) = represents the total concentration of all volatile organic compounds in the air.
+- VOCs (Volatile Organic Compounds) = individual or specific groups of volatile organic compounds.
+- TVOC (Total Volatile Organic Compounds) = represents the total concentration of all volatile organic compounds in the air.
 
 ---
 # How are the different sensors interfaced?
@@ -54,9 +55,9 @@ MQ-8 = Hydrogen Sulfide
 
 
 MQ-3 R_s,MQ-4 R_s,MQ-8 R_s
-128696.25520110958,293030.303030303,135137.88098693758,
+ex) 128696.25520110958,293030.303030303,135137.88098693758,
 
-
+(ENS160 is optional...)
 ENS160 TVOC,ENS160 eCO₂,ENS160 AQI
 datasheet: https://cdn-learn.adafruit.com/assets/assets/000/115/331/original/SC_001224_DS_1_ENS160_Datasheet_Rev_0_95-2258311.pdf 
 TVOC values: 0 - 65,000
@@ -65,7 +66,7 @@ AQI values: 1-5
 - ex) 0,400,1
 
 SCD41 CO₂,SCD41 Temperature,SCD41 Humidity,
-590,24.380483710994127,29.660486762798506
+ex) 590,24.380483710994127,29.660486762798506
 
 PM1.0,PM2.5,PM10
-0,0,0
+ex) 1,1,3
