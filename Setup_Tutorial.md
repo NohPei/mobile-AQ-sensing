@@ -30,7 +30,28 @@ Download it through https://www.raspberrypi.com/software/
 In this repo, Raspberry Pi 5, 64 bit enhanced version is installed
 
 #### Required Libraries (in python venv)
+To make sure you can access the sysled as indication. You can run following command to create new rule and change the permission of sysled:
+
+```
+sudo nano /etc/udev/rules.d/99-led-permissions.rules
+```
+
+Type following command in the new rules:
+```
+SUBSYSTEM=="leds", KERNEL=="ACT", MODE="0666"
+```
+
+Reload rules:
+```
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+```
+
+If none of the above things work, manually modify the permission with 
+```
+sudo chmod 666 /sys/class/leds/ACT/brightness
+```
 
 1. ADS1115 => pip install adafruit-circuitpython-ads1x15
 2. lgpio (not defaulty installed for pi5, higher performance) => pip install lgpio
-
+3. 
