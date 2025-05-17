@@ -13,9 +13,8 @@ scd4x.start_periodic_measurement()
 initial_time = time.time()
 while True:
     if scd4x.data_ready:
+        scd4x_readings = [scd4x.CO2, scd4x.temperature, scd4x.relative_humidity]
         print("Elapsed time since last measurement: ", time.time() - initial_time)
-        print(f"CO2: {scd4x.CO2}ppm, Temperature: {scd4x.temperature}C, Humidity: {scd4x.relative_humidity}%")
-        print(f"Temperature: {scd4x.temperature}C")
-        print(f"Humidity: {scd4x.relative_humidity}%")
+        print(f"CO2: {scd4x_readings[0]}ppm, Temperature: {scd4x_readings[1]}C, Humidity: {scd4x_readings[2]}%")
         initial_time = time.time()
         time.sleep(5)

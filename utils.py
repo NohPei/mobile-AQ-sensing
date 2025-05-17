@@ -6,7 +6,13 @@ class config:
     I2C_ADDRESS = 0x48
     I2C_FREQ = 100000
     SENSOR_HEADERS = [
-        "Timestamp (ms)", "MQ-3 Voltage", "MQ-4 Voltage", "MQ-8 Voltage"
+        "Timestamp (ms)", 
+        "MQ-3 Voltage", 
+        "MQ-4 Voltage", 
+        "MQ-8 Voltage",
+        "CO2 (ppm)",
+        "Temperature (C)",
+        "Humidity (%)"
     ]
   
 led_path="/sys/class/leds/ACT/brightness"

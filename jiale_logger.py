@@ -20,6 +20,7 @@ import queue
 import utils
 from utils import config
 print("utils imported")
+
 class DataCollector(threading.Thread):
     def __init__(self, data_queue):
         super().__init__()
@@ -51,16 +52,22 @@ class DataCollector(threading.Thread):
             while self.running:
                 timestamp = datetime.now()
                 mq_readings = [mq_sensor.voltage for mq_sensor in mq_sensors.values()]
-                
+                if scd41.data_ready:
+                    scd41_readings = [scd41.CO2, scd41.temperature, scd41.relative_humidity]
+                else:
+                    scd41_readings = [-1, -1, -1]
                 # Write to CSV
-                writer.writerow([timestamp.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3], *mq_readings])
+                writer.writerow([timestamp.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3],
+                                *mq_readings, 
+                                *scd41_readings])
                 file.flush()
                 
                 # Send data to plotting thread
                 if self.data_queue is not None:
-                    self.data_queue.put((timestamp, *mq_readings))
-                
-                #time.sleep(0.1)  # Adjust sampling rate as needed
+                    self.data_queue.put((timestamp, 
+                                         *mq_readings, 
+                                         *scd41_readings))
+                time.sleep(0.1)  # Adjust sampling rate as needed
 
     def stop(self):
         self.running = False
@@ -75,7 +82,7 @@ def main():
 
     if plot_enabled:
         # Create figure and axes
-        fig, ax = plt.subplots(3, 1, figsize=(10, 8))
+        fig, ax = plt.subplots(4, 1, figsize=(10, 8))
         max_points = 100
         
         # Create deques for data
@@ -83,14 +90,22 @@ def main():
         mq3_data = deque(maxlen=max_points)
         mq4_data = deque(maxlen=max_points)
         mq8_data = deque(maxlen=max_points)
+        co2_data = deque(maxlen=max_points)
 
         # Initialize plots
         lines = []
-        labels = ['MQ-3 (Alcohol)', 'MQ-4 (Methane)', 'MQ-8 (Hydrogen)']
+        labels = ['MQ-3 (Alcohol)', 
+                  'MQ-4 (Methane)', 
+                  'MQ-8 (Hydrogen)',
+                  'CO2 (ppm)']
         for i, axis in enumerate(ax):
             line, = axis.plot([], [], 'r-', label=labels[i])
             lines.append(line)
-            axis.set_ylabel('Voltage (V)')
+            if i == 3:
+                axis.set_ylabel('CO2 (ppm)')
+                axis.set_ylim(400, 5000)
+            else:
+                axis.set_ylabel('Voltage (V)')
             axis.set_xlabel('Time (s)')
             axis.grid(True)
             axis.legend()
@@ -112,8 +127,7 @@ def main():
             
             # Get all available data from queue
             while not data_queue.empty():
-                timestamp, mq3, mq4, mq8 = data_queue.get()
-
+                timestamp, mq3, mq4, mq8, co2, temp, hum = data_queue.get()
                 if start_time is None:
                     start_time = timestamp
 
@@ -123,10 +137,16 @@ def main():
                 mq3_data.append(mq3)
                 mq4_data.append(mq4)
                 mq8_data.append(mq8)
+                if co2 is not None:
+                    co2_data.append(co2)
+                elif len(co2_data) > 0:
+                    co2_data.append(co2_data[-1])
+                else:
+                    co2_data.append(0)
 
             # Update each line
-            data_sets = [mq3_data, mq4_data, mq8_data]
-            for line, data in zip(lines, data_sets):
+            data_sets = [mq3_data, mq4_data, mq8_data, co2_data]
+            for i, (line, data) in enumerate(zip(lines, data_sets)):
                 line.set_data(list(times), list(data))
                 axis = line.axes
                 axis.relim()
