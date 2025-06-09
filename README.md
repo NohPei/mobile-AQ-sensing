@@ -27,11 +27,11 @@
 - VOCs (Volatile Organic Compounds) = individual or specific groups of volatile organic compounds.
 - TVOC (Total Volatile Organic Compounds) = represents the total concentration of all volatile organic compounds in the air.
 
----
+
 # How are the different sensors interfaced?
 - I2C: RTC, MQs (x3), IMU, ENS160, SCD41, PM
 - UART: GPS
----
+
 # Sensors + Data Structure 
 Overview and in-depth resources for the sensors, type of data they capture, and output format of the CSV.
 
@@ -64,7 +64,6 @@ Each row in the CSV file contains a timestamped sensor reading from the mobile a
 | `Mag X`             | X-axis magnetic field                              | µT                  |
 | `Mag Y`             | Y-axis magnetic field                              | µT                  |
 | `Mag Z`             | Z-axis magnetic field                              | µT                  |
-|------------------------------------------------------------------------------------------------|
 
 
 ### Real-Time Clock (ds3231) -> Timestamp (ms)
