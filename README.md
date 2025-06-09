@@ -76,6 +76,7 @@ Each row in the CSV file contains a timestamped sensor reading from the mobile a
 [resource 1](https://www.theengineeringprojects.com/2024/04/mq-gas-sensor-series.html)
 [resource 2](https://robocraze.com/blogs/post/mq-series-gas-sensor)
 [resource 3](https://iotbyhvm.ooo/mq-gas-sensors-gas-sensors/)
+
 MQ-3 = H2, LPG, CH4, CO, Alcohol, Smoke or Propane
 - [MQ-3 datasheet](https://cdn.sparkfun.com/assets/6/a/1/7/b/MQ-3.pdf)
 MQ-4 = Methane, CNG
@@ -102,7 +103,7 @@ SCD41 CO₂,SCD41 Temperature,SCD41 Humidity,
 ex) 590,24.380483710994127,29.660486762798506
 
 DFROBOT SEN0571 Odor Sensor (*qualitative* sensor...)
-[resource](https://docs.cirkitdesigner.com/component/8f45805b-c744-4d19-9426-4d6299082ad4/fermion-mems-odor-smell-gas-detection-sensor) <- although the wiring instructions are incorrect on that page, it has good notes
+[resource](https://docs.cirkitdesigner.com/component/8f45805b-c744-4d19-9426-4d6299082ad4/fermion-mems-odor-smell-gas-detection-sensor) <- although the wiring instructions are incorrect, that resource has good notes
 
 PM1.0,PM2.5,PM10
 ex) 1,1,3
