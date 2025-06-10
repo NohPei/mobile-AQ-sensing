@@ -15,6 +15,7 @@
 - **Adafruit Breakout board Plantower PMSA003I** (Particulate Matter Sensor, PM1.0 / PM2.5 / PM10)
 - **GY-BNO08X** (9 DoF IMU — accelerometer, gyro, magnetometer)
 - **Adafruit SCD41** (True/NDIR CO₂, Temperature, Humidity)
+- **Adafruit ENS160 MOX Gas Sensor** (TVOC, AQI, eCO₂)
 - **DFRobot SEN0571** (Qualitative Odor Sensor)
 - **GT-U7 GPS & GNSS Antenna Amplifier**
 
